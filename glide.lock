@@ -1,0 +1,6 @@
+hash: 368e929550f485884390e9702d4b23376a8a4e65b8b5787c5330d881f125d8b2
+updated: 2017-09-21T11:35:25.216239766+08:00
+imports:
+- name: github.com/libgit2/git2go
+  version: 334260d743d713a55ff3c097ec6707f2bb39e9d5
+testImports: []
