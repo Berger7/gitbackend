@@ -39,3 +39,34 @@ func TestFindDefaultBranch(t *testing.T) {
 
 	return
 }
+
+func TestSize(t *testing.T) {
+	repo, err := Init(TestRepoPath)
+	if err != nil {
+		t.Errorf("init repo error")
+	}
+
+	size, err := repo.size()
+	if err != nil {
+		t.Errorf("get repo size error : %v", err)
+	}
+
+	if len(size) == 0 {
+		t.Errorf("get repo size string err : %v", err)
+	}
+
+	return
+}
+
+func TestLog(t *testing.T)  {
+	repo, err := Init(TestRepoPath)
+	if err != nil {
+		t.Errorf("init repo error")
+	}
+
+	commits, err := repo.log(10, 0, "master", false, true);
+	if err != nil {
+		t.Errorf("get commits error : %v", err)
+	}
+	fmt.Printf("%v", commits)
+}
