@@ -68,5 +68,22 @@ func TestLog(t *testing.T)  {
 	if err != nil {
 		t.Errorf("get commits error : %v", err)
 	}
-	fmt.Printf("%v", commits)
+	if len(commits) == 0 {
+		t.Errorf("get commits failed")
+	}
+}
+
+func TestRootRef(t *testing.T) {
+	repo, err := Init(TestRepoPath)
+	if err != nil {
+		t.Errorf("init repo error")
+	}
+
+	refName, err := repo.findDefaultBranch()
+	if err != nil {
+		t.Errorf("get refName error : %v", err)
+	}
+	if len(refName) == 0 {
+		t.Errorf("get refName is empty")
+	}
 }

@@ -48,8 +48,9 @@ func Init(fullRepoPath string) (*RawRepository, error) {
 	return RepositoryClient,nil
 }
 
-func (r *RawRepository) rootRef() {
-
+func (r *RawRepository) rootRef() (refName string, err error){
+	refName,err = r.findDefaultBranch()
+	return
 }
 
 // getTags return all tags from repository
