@@ -3,11 +3,8 @@ default: test
 pre_env:
 	./prepare_env.sh
 
-install: pre_env
-	glide install
-
-build: install
+build: pre_env
 	go build
 
-test: install
+test: pre_env
 	go test
