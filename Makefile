@@ -7,4 +7,4 @@ build: pre_env
 	go build
 
 test: pre_env
-	go test
+	go test -race -coverprofile=coverage.txt -covermode=atomic
