@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-const TestRepoPath = "/tmp/test.git"
+const TestRepoPath = "./git-test.git"
 
 func TestGetBranches(t *testing.T){
 	repo,err := Init(TestRepoPath)
@@ -85,5 +85,22 @@ func TestRootRef(t *testing.T) {
 	}
 	if len(refName) == 0 {
 		t.Errorf("get refName is empty")
+	}
+}
+
+func TestCommitsBetween(t *testing.T) {
+	repo, err := Init(TestRepoPath)
+	if err != nil {
+		t.Errorf("init repo error")
+	}
+
+	fromRefName := "testA"
+	toRefName := "testB"
+	commits, err := repo.commitsBetween(fromRefName, toRefName)
+	if err != nil {
+		t.Errorf("get commits between %s..%s", fromRefName, toRefName)
+	}
+	if len(commits) != 2 {
+		t.Errorf("commits between %s..%s should be 2", fromRefName, toRefName)
 	}
 }

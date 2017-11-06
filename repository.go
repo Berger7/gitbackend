@@ -283,3 +283,43 @@ func (r *RawRepository) shaFromRev(rev string) (oid *git.Oid, err error) {
 	}
 	return obj.Id(), nil
 }
+
+func (r *RawRepository) commitsBetween(from string, to string) (commits []git.Commit, err error) {
+	walker,err := r.Repository.Walk()
+	if err != nil {
+		return
+	}
+
+	defer walker.Free()
+
+	walker.Sorting(git.SortTime | git.SortReverse)
+	shaFrom, err := r.shaFromRev(from)
+	if err != nil {
+		return
+	}
+	shaTo, err := r.shaFromRev(to)
+	if err != nil {
+		return
+	}
+	walker.Push(shaTo)
+	walker.Hide(shaFrom)
+
+	walker.Iterate(func(commit *git.Commit) bool {
+		commits = append(commits, *commit)
+		return true
+	})
+
+	return
+}
+
+func (r *RawRepository) countCommitsBetween(from string, to string) (count int, err error) {
+	return
+}
+
+func (r *RawRepository) mergeBaseCommit(from string, to string) {
+
+}
+
+func (r *RawRepository) diff(from string, to string) (diffs []git.Diff, err error){
+	return
+}
